@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://dewyn5as4inkm"]
+
+[ext_resource type="Script" path="res://scripts/StartGame.gd" id="1_5s5pc"]
+[ext_resource type="Texture2D" uid="uid://qhn6m1d704bg" path="res://scenes/Puffer_Fish_DSC01257-1522159339.JPG" id="2_8docf"]
+
+[node name="menu" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+z_index = 1
+y_sort_enabled = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1162.0
+offset_bottom = 639.0
+
+[node name="Label" type="Label" parent="Control"]
+y_sort_enabled = true
+layout_mode = 0
+offset_left = 492.0
+offset_top = 193.0
+offset_right = 660.0
+offset_bottom = 235.0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+text = "Flappy Fish"
+
+[node name="btnPlay" type="Button" parent="."]
+z_as_relative = false
+y_sort_enabled = true
+offset_left = 466.0
+offset_top = 313.0
+offset_right = 688.0
+offset_bottom = 371.0
+text = "Begin"
+script = ExtResource("1_5s5pc")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+z_as_relative = false
+offset_right = 1154.0
+offset_bottom = 646.0
+mouse_filter = 2
+texture = ExtResource("2_8docf")
+expand_mode = 1
+
+[connection signal="pressed" from="btnPlay" to="btnPlay" method="_on_pressed"]

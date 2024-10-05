@@ -1,0 +1,134 @@
+[gd_scene load_steps=18 format=3 uid="uid://dsv54oatgckjp"]
+
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_dhevf"]
+[ext_resource type="Script" path="res://scripts/Birdscript.gd" id="1_hjhxw"]
+[ext_resource type="Texture2D" uid="uid://c4fmp37p8rdfg" path="res://sprites/fishTile_080.png" id="2_jrear"]
+[ext_resource type="PackedScene" uid="uid://d10wpgk0dbtt4" path="res://gameObjects/wall.tscn" id="3_qrdjl"]
+[ext_resource type="Script" path="res://scripts/Sus.gd" id="4_kebhp"]
+[ext_resource type="Texture2D" uid="uid://civb8y0opchff" path="res://sprites/fishTile_078.png" id="5_jkv1j"]
+[ext_resource type="Script" path="res://scripts/UI.gd" id="6_f61hf"]
+[ext_resource type="Script" path="res://scenes/label.gd" id="9_8203k"]
+[ext_resource type="Texture2D" uid="uid://cxltxkgu1kd2q" path="res://scenes/cartoon-sea-underwater-scene-color-background-vector-21051593.jpg" id="10_fyho4"]
+[ext_resource type="Script" path="res://scenes/returnbutton.gd" id="10_pw5im"]
+[ext_resource type="AudioStream" uid="uid://cj6c22wwjpsnt" path="res://scenes/crash.wav" id="11_6qk6u"]
+[ext_resource type="Script" path="res://scenes/impact.gd" id="12_sljjj"]
+[ext_resource type="AudioStream" uid="uid://cetmfuc5jicyy" path="res://scenes/thud-82914.mp3" id="13_cloqp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cox6n"]
+radius = 48.2597
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0fjj1"]
+size = Vector2(1182, 41)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_280fk"]
+radius = 30.0666
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cuo3v"]
+size = Vector2(11, 696)
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_dhevf")
+
+[node name="Fish" type="RigidBody2D" parent="."]
+position = Vector2(272, 216)
+gravity_scale = 0.0
+script = ExtResource("1_hjhxw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fish"]
+shape = SubResource("CircleShape2D_cox6n")
+
+[node name="FishTile080" type="Sprite2D" parent="Fish"]
+scale = Vector2(2, 2)
+texture = ExtResource("2_jrear")
+
+[node name="Wall" parent="." instance=ExtResource("3_qrdjl")]
+position = Vector2(659, 610)
+
+[node name="Wall2" parent="." instance=ExtResource("3_qrdjl")]
+position = Vector2(658, 344)
+
+[node name="Wall3" parent="." instance=ExtResource("3_qrdjl")]
+position = Vector2(1042, 611)
+
+[node name="Wall4" parent="." instance=ExtResource("3_qrdjl")]
+position = Vector2(1040, 347)
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(11, 670)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(571, 10.5)
+shape = SubResource("RectangleShape2D_0fjj1")
+
+[node name="Sus" type="RigidBody2D" parent="."]
+position = Vector2(861, 515)
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("4_kebhp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sus"]
+shape = SubResource("CircleShape2D_280fk")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sus"]
+texture = ExtResource("5_jkv1j")
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("6_f61hf")
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 1098.0
+offset_top = 18.0
+offset_right = 1138.0
+offset_bottom = 41.0
+text = "0"
+script = ExtResource("9_8203k")
+
+[node name="rtnMenu" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 23.0
+offset_right = 180.0
+offset_bottom = 70.0
+text = "Menu"
+script = ExtResource("10_pw5im")
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+z_index = -1
+layout_mode = 0
+offset_right = 1159.0
+offset_bottom = 680.0
+mouse_filter = 2
+texture = ExtResource("10_fyho4")
+expand_mode = 1
+
+[node name="BorderL" type="StaticBody2D" parent="."]
+position = Vector2(10, 145)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderL"]
+position = Vector2(-16.5, 199)
+shape = SubResource("RectangleShape2D_cuo3v")
+
+[node name="BorderR" type="StaticBody2D" parent="."]
+position = Vector2(1175, 131)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderR"]
+position = Vector2(-16.5, 199)
+shape = SubResource("RectangleShape2D_cuo3v")
+
+[node name="woodImpact" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_6qk6u")
+script = ExtResource("12_sljjj")
+
+[node name="rockImpact" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("13_cloqp")
+script = ExtResource("12_sljjj")
+
+[connection signal="body_entered" from="Sus" to="Sus" method="_on_body_entered"]
+[connection signal="body_shape_entered" from="Sus" to="Sus" method="_on_body_shape_entered"]
+[connection signal="pressed" from="UI/rtnMenu" to="UI/rtnMenu" method="_on_pressed"]

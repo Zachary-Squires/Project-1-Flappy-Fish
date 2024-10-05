@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://d10wpgk0dbtt4"]
+
+[ext_resource type="Texture2D" uid="uid://q4hdqevnohou" path="res://sprites/fishTile_062.png" id="1_lnk64"]
+[ext_resource type="Script" path="res://gameObjects/wall.gd" id="1_oqin5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oue1s"]
+size = Vector2(70, 262)
+
+[node name="Wall" type="RigidBody2D"]
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_oqin5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_oue1s")
+
+[node name="FishTile062" type="Sprite2D" parent="."]
+position = Vector2(0, -6)
+scale = Vector2(1, 4.03125)
+texture = ExtResource("1_lnk64")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

@@ -1,0 +1,173 @@
+[gd_scene load_steps=16 format=3 uid="uid://vh7wqdu5jfmr"]
+
+[ext_resource type="Script" path="res://scripts/UI.gd" id="1_f48ma"]
+[ext_resource type="Script" path="res://scenes/label.gd" id="2_1e1w3"]
+[ext_resource type="Script" path="res://scenes/returnbutton.gd" id="3_0n2df"]
+[ext_resource type="Texture2D" uid="uid://cxltxkgu1kd2q" path="res://scenes/cartoon-sea-underwater-scene-color-background-vector-21051593.jpg" id="4_3p2i5"]
+[ext_resource type="Script" path="res://scripts/Birdscript.gd" id="5_dobnf"]
+[ext_resource type="Texture2D" uid="uid://c4fmp37p8rdfg" path="res://sprites/fishTile_080.png" id="6_m0pr7"]
+[ext_resource type="PackedScene" uid="uid://d10wpgk0dbtt4" path="res://gameObjects/wall.tscn" id="7_pb0ea"]
+[ext_resource type="PackedScene" uid="uid://bajgvemk3k6as" path="res://scripts/sus.tscn" id="8_stjoh"]
+[ext_resource type="AudioStream" uid="uid://cj6c22wwjpsnt" path="res://scenes/crash.wav" id="9_cthcf"]
+[ext_resource type="Script" path="res://scenes/impact.gd" id="10_dc04q"]
+[ext_resource type="AudioStream" uid="uid://cetmfuc5jicyy" path="res://scenes/thud-82914.mp3" id="11_lkdar"]
+[ext_resource type="PackedScene" uid="uid://blwpan1p73igl" path="res://scenes/coral.tscn" id="12_c0uor"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xf14g"]
+radius = 48.2597
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfdbb"]
+size = Vector2(1182, 41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gf8gf"]
+size = Vector2(11, 696)
+
+[node name="level3" type="Node2D"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_f48ma")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="UI"]
+layout_mode = 0
+offset_left = 1098.0
+offset_top = 18.0
+offset_right = 1138.0
+offset_bottom = 41.0
+text = "0"
+script = ExtResource("2_1e1w3")
+metadata/_edit_use_anchors_ = true
+
+[node name="rtnMenu" type="Button" parent="UI"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 23.0
+offset_right = 180.0
+offset_bottom = 70.0
+text = "Menu"
+script = ExtResource("3_0n2df")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="UI"]
+z_index = -1
+layout_mode = 0
+offset_right = 1159.0
+offset_bottom = 680.0
+mouse_filter = 2
+texture = ExtResource("4_3p2i5")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Fish" type="RigidBody2D" parent="."]
+position = Vector2(1022, 490)
+gravity_scale = 0.0
+script = ExtResource("5_dobnf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Fish"]
+shape = SubResource("CircleShape2D_xf14g")
+
+[node name="FishTile080" type="Sprite2D" parent="Fish"]
+scale = Vector2(2, 2)
+texture = ExtResource("6_m0pr7")
+
+[node name="Wall" parent="." instance=ExtResource("7_pb0ea")]
+position = Vector2(133, 335)
+rotation = 2.08392
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(11, 670)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(571, 10.5)
+shape = SubResource("RectangleShape2D_dfdbb")
+
+[node name="Sus" parent="." instance=ExtResource("8_stjoh")]
+position = Vector2(56, 558)
+
+[node name="woodImpact" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_cthcf")
+script = ExtResource("10_dc04q")
+
+[node name="rockImpact" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_lkdar")
+script = ExtResource("10_dc04q")
+
+[node name="Coral" parent="." instance=ExtResource("12_c0uor")]
+position = Vector2(227, 623)
+gravity_scale = 8.0
+
+[node name="BorderL" type="StaticBody2D" parent="."]
+position = Vector2(10, 145)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderL"]
+position = Vector2(-16.5, 199)
+shape = SubResource("RectangleShape2D_gf8gf")
+
+[node name="BorderR" type="StaticBody2D" parent="."]
+position = Vector2(1175, 131)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BorderR"]
+position = Vector2(-16.5, 199)
+shape = SubResource("RectangleShape2D_gf8gf")
+
+[node name="Coral2" parent="." instance=ExtResource("12_c0uor")]
+position = Vector2(294, 626)
+gravity_scale = 4.0
+
+[node name="Coral3" parent="." instance=ExtResource("12_c0uor")]
+position = Vector2(360, 625)
+gravity_scale = 4.0
+
+[node name="Coral4" parent="." instance=ExtResource("12_c0uor")]
+position = Vector2(428, 627)
+gravity_scale = 4.0
+
+[node name="Coral5" parent="." instance=ExtResource("12_c0uor")]
+position = Vector2(154, 548)
+gravity_scale = 4.0
+
+[node name="Coral6" parent="." instance=ExtResource("12_c0uor")]
+position = Vector2(225, 547)
+gravity_scale = 4.0
+
+[node name="Coral7" parent="." instance=ExtResource("12_c0uor")]
+position = Vector2(156, 626)
+gravity_scale = 4.0
+
+[node name="Coral8" parent="." instance=ExtResource("12_c0uor")]
+position = Vector2(294, 555)
+gravity_scale = 4.0
+
+[node name="Coral9" parent="." instance=ExtResource("12_c0uor")]
+position = Vector2(366, 556)
+gravity_scale = 4.0
+
+[node name="Coral10" parent="." instance=ExtResource("12_c0uor")]
+position = Vector2(435, 547)
+gravity_scale = 4.0
+
+[node name="Coral11" parent="." instance=ExtResource("12_c0uor")]
+position = Vector2(152, 476)
+gravity_scale = 4.0
+
+[node name="Coral12" parent="." instance=ExtResource("12_c0uor")]
+position = Vector2(225, 477)
+gravity_scale = 4.0
+
+[node name="Coral13" parent="." instance=ExtResource("12_c0uor")]
+position = Vector2(297, 474)
+gravity_scale = 4.0
+
+[node name="Coral14" parent="." instance=ExtResource("12_c0uor")]
+position = Vector2(365, 476)
+gravity_scale = 4.0
+
+[node name="Coral15" parent="." instance=ExtResource("12_c0uor")]
+position = Vector2(435, 469)
+gravity_scale = 4.0
+
+[connection signal="pressed" from="UI/rtnMenu" to="UI/rtnMenu" method="_on_pressed"]

@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://bajgvemk3k6as"]
+
+[ext_resource type="Script" path="res://scripts/Sus.gd" id="1_x18hg"]
+[ext_resource type="Texture2D" uid="uid://civb8y0opchff" path="res://sprites/fishTile_078.png" id="2_85uta"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p53ra"]
+radius = 30.0666
+
+[node name="Sus" type="RigidBody2D"]
+position = Vector2(861, 515)
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_x18hg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_p53ra")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_85uta")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
